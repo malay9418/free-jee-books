@@ -5,17 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Home</title>
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      background-color: white;
+      color: black;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    .search-bar {
+      margin-bottom: 20px;
+    }
+    .book-card {
+      border: 1px solid black;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: transform 0.3s;
+    }
+    .book-card:hover {
+      transform: scale(1.05);
+    }
+    .book-card img {
+      width: 100%;
+      height: auto;
+    }
+    .book-card-body {
+      padding: 10px;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+    .book-card-title {
+      margin: 10px 0;
+      font-size: 1.2em;
+      color: black;
+    }
+@media (max-width: 768px) {
+      .book-card {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .book-card-body {
+        padding: 20px;
+      }
+    }
+    .logout-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-<div>
-  
-</div>
+  <button class="logout-btn" onclick="_supabase.auth.signOut()">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
 
+  <div class="container">
+    <h1 class="text-center">Book Shop</h1>
+    <input type="text" id="searchInput" class="form-control search-bar" placeholder="Search for books...">
+    <div class="row" id="bookList">
+      <!-- Book items will be inserted here by JavaScript -->
+    </div>
+  </div>
 
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
     const {
       createClient
-    } = supabase
+    } = supabase;
     const _supabase = createClient('https://vpksatxwwtlmnnpirfeq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwa3NhdHh3d3RsbW5ucGlyZmVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgyNTc3NjMsImV4cCI6MjAzMzgzMzc2M30.HENM8Efq_NBXlA6zIrspf1v4AaxJLjiZ-gMb4uuk8K0');
 
     _supabase.auth.onAuthStateChange((event, session) => {
@@ -24,13 +93,63 @@
         window.location.href = "https://malay9418.github.io/free-jee-books/home";
       }
     });
-    
+
     (async function checkAuth() {
-      const { data: { user } } = await _supabase.auth.getUser();
-      if(!user) {
+      const {
+        data: {
+          user
+        }
+      } = await _supabase.auth.getUser();
+      if (!user) {
         window.location.href = "https://malay9418.github.io/free-jee-books/";
       }
     })();
+
+
+    const books = [{
+      title: 'Book One', image: 'https://via.placeholder.com/150', url: 'https://example.com/book1'
+    },
+      {
+        title: 'Book Two', image: 'https://via.placeholder.com/150', url: 'https://example.com/book2'
+      },
+      {
+        title: 'Book Three', image: 'https://via.placeholder.com/150', url: 'https://example.com/book3'
+      },
+      {
+        title: 'Book Four', image: 'https://via.placeholder.com/150', url: 'https://example.com/book4'
+      },
+      {
+        title: 'Book Five', image: 'https://via.placeholder.com/150', url: 'https://example.com/book5'
+      }];
+
+    const bookList = document.getElementById('bookList');
+
+    function displayBooks(books) {
+      bookList.innerHTML = '';
+      books.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.className = 'col-md-4 col-sm-12';
+        bookCard.innerHTML = `
+        <div class="book-card">
+        <img src="${book.image}" alt="${book.title}">
+        <div class="book-card-body">
+        <h5 class="book-card-title">${book.title}</h5>
+        <a href="${book.url}" class="btn btn-custom">View Book</a>
+        </div>
+        </div>
+        `;
+        bookList.appendChild(bookCard);
+      });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchTerm));
+      displayBooks(filteredBooks);
+    });
+
+    // Initial display of books
+    displayBooks(books);
   </script>
 </body>
 </html>
