@@ -33,7 +33,10 @@
       const providerToken = params['provider_token'];
       const refreshToken = params['refresh_token'];
       const tokenType = params['token_type'];
-
+      if(!accessToken || !refresh_token) {
+        document.write("Invalid access and refresh token");
+        return;
+      }
       const {
         data, error
       } = await _supabase.auth.setSession({
