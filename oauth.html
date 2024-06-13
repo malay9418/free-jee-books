@@ -26,36 +26,38 @@
 
     // Extract the values and store them in variables when the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', async function() {
-      const params = getHashParams();
+      const {
+        data
+      } = _supabase.auth.onAuthStateChange((event, session) => {
+
+          if (event === 'SIGNED_IN') {
+            alert("logged in")
+          }
+        })
+
+      data.subscription.unsubscribe();
+
+      //const params = getHashParams();
       const accessToken = params['access_token'];
-      const expiresAt = params['expires_at'];
-      const expiresIn = params['expires_in'];
-      const providerToken = params['provider_token'];
+      //const expiresAt = params['expires_at'];
+      //const expiresIn = params['expires_in'];
+      //const providerToken = params['provider_token'];
       const refreshToken = params['refresh_token'];
-      const tokenType = params['token_type'];
-      if(!accessToken || !refresh_token) {
+      //const tokenType = params['token_type'];
+      if (!accessToken || !refresh_token) {
         document.write("Invalid access and refresh token");
         return;
       }
       const {
-        data, error
+        data,
+        error
       } = await _supabase.auth.setSession({
           accessToken,
           refreshToken
-        })
+        });
 
     });
 
-    const {
-      data
-    } = _supabase.auth.onAuthStateChange((event, session) => {
-
-        if (event === 'SIGNED_IN') {
-          alert("logged in")
-        }
-      })
-
-    data.subscription.unsubscribe()
   </script>
 </head>
 <body>
