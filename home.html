@@ -22,6 +22,14 @@
         window.location.href = "https://malay9418.github.io/free-jee-books/home";
       }
     });
+    
+    
+    (async function checkAuth() {
+      const { data: { user } } = await _supabase.auth.getUser();
+      if(!user) {
+        window.location.href = "https://malay9418.github.io/free-jee-books/home";
+      }
+    });
   </script>
 </body>
 </html>
