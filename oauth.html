@@ -12,7 +12,6 @@
   Logging in...
 
   <script>
-    window.location.href = "https://malay9418.github.io/free-jee-books";
     const {
       createClient
     } = supabase;
@@ -20,7 +19,8 @@
 
     _supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN') {
-        window.location.href = "https://malay9418.github.io/free-jee-books";
+        document.write("Logged in");
+        window.location.href = "https://malay9418.github.io/free-jee-books/home";
       }
     });
 
