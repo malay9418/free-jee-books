@@ -29,30 +29,8 @@
     }
 
     // Extract the values and store them in variables when the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', async function() {
-      const params = getHashParams();
-      const accessToken = params['access_token'];
-      //const expiresAt = params['expires_at'];
-      //const expiresIn = params['expires_in'];
-      //const providerToken = params['provider_token'];
-      const refreshToken = params['refresh_token'];
-      //const tokenType = params['token_type'];
-      if (!accessToken || !refresh_token) {
-        document.write("Invalid access and refresh token");
-        return;
-      }
-      alert(accessToken, refreshToken);
-      const {
-        data,
-        error
-      } = await _supabase.auth.setSession({
-          accessToken,
-          refreshToken
-        });
-       if(error) alert(error);
-       alert(data);
-       window.location.href = "https://malay9418.github.io/free-jee-books";
-
+    document.addEventListener('DOMContentLoaded', () => {
+      alert("loaded");
     });
 
   </script>
