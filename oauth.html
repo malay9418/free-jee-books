@@ -19,7 +19,7 @@
 
     _supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN') {
-        alert("logged in");
+        window.location.href = "https://malay9418.github.io/free-jee-books";
       }
     });
 
@@ -49,7 +49,6 @@
         });
       
       if(error) document.write(error);
-      alert(data)
     });
 
   </script>
