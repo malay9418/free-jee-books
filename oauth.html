@@ -41,6 +41,7 @@
         document.write("Invalid access and refresh token");
         return;
       }
+      alert(accessToken, refreshToken);
       const {
         data,
         error
@@ -49,6 +50,7 @@
           refreshToken
         });
        if(error) alert(error);
+       alert(data);
        window.location.href = "https://malay9418.github.io/free-jee-books";
 
     });
