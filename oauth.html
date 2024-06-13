@@ -7,7 +7,11 @@
   <script src="
     https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.4/dist/umd/supabase.min.js
     "></script>
-  <script>
+</head>
+<body>
+  Logging in...
+  
+    <script>
     const {
       createClient
     } = supabase;
@@ -44,13 +48,11 @@
           accessToken,
           refreshToken
         });
+       if(error) alert(error);
        window.location.href = "https://malay9418.github.io/free-jee-books";
 
     });
 
   </script>
-</head>
-<body>
-  Logging in...
 </body>
 </html>
