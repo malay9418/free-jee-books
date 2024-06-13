@@ -10,8 +10,8 @@
 </head>
 <body>
   Logging in...
-  
-    <script>
+
+  <script>
     const {
       createClient
     } = supabase;
@@ -28,9 +28,12 @@
       return result;
     }
 
-    // Extract the values and store them in variables when the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', () => {
-      alert(getHashParams());
+    document.addEventListener('DOMContentLoaded', async () => {
+
+      const params = getHashParams();
+      const access_token = params['access_token'];
+      const refresh_token = params['refresh_token'];
+      alert(access_token, refresh_token);
     });
 
   </script>
