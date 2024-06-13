@@ -72,6 +72,15 @@
     const _supabase = createClient('https://vpksatxwwtlmnnpirfeq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwa3NhdHh3d3RsbW5ucGlyZmVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgyNTc3NjMsImV4cCI6MjAzMzgzMzc2M30.HENM8Efq_NBXlA6zIrspf1v4AaxJLjiZ-gMb4uuk8K0');
 
 
+const { data } = _supabase.auth.onAuthStateChange((event, session) => {
+  console.log(event, session)
+
+  if (event === 'SIGNED_IN') {
+    alert("logged in")
+  }
+})
+
+data.subscription.unsubscribe()
   </script>
 </body>
 </html>
