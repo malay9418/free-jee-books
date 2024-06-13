@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+  <script src="
+    https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.4/dist/umd/supabase.min.js
+    "></script>
+  <style>
+    body {
+      background-color: white;
+      color: black;
+      height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .login-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .btn-custom {
+      width: 100%;
+      margin-bottom: 10px;
+      border: 1px solid black;
+      border-radius: 5px;
+      color: black;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none !important;
+    }
+    .btn-custom i {
+      margin-right: 10px;
+    }
+    .btn-custom:hover {
+      background-color: #f0f0f0;
+    }
+    .hero {
+      width: 100%;
+      padding: 0 50px;
+      box-sizing: border-box;
+    }
+
+  </style>
+</head>
+<body>
+  <img class="hero" src="https://svgshare.com/i/178S.svg">
+  <h2>Hello reader 👋</h2>
+  <div class="login-container">
+    <button class="btn btn-custom" onclick="_supabase.auth.signInWithOAuth({provider: 'google'})">
+      <i class="fab fa-google"></i> Login with Google
+    </button>
+  </div>
+
+
+  <script>
+    const {
+      createClient
+    } = supabase
+    const _supabase = createClient('https://vpksatxwwtlmnnpirfeq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwa3NhdHh3d3RsbW5ucGlyZmVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgyNTc3NjMsImV4cCI6MjAzMzgzMzc2M30.HENM8Efq_NBXlA6zIrspf1v4AaxJLjiZ-gMb4uuk8K0');
+
+
+  </script>
+</body>
+</html>
