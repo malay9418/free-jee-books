@@ -70,7 +70,13 @@
       createClient
     } = supabase
     const _supabase = createClient('https://vpksatxwwtlmnnpirfeq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwa3NhdHh3d3RsbW5ucGlyZmVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgyNTc3NjMsImV4cCI6MjAzMzgzMzc2M30.HENM8Efq_NBXlA6zIrspf1v4AaxJLjiZ-gMb4uuk8K0');
-
+    
+    _supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN') {
+        document.write("Logged in");
+        window.location.href = "https://malay9418.github.io/free-jee-books/home";
+      }
+    });
   </script>
 </body>
 </html>
