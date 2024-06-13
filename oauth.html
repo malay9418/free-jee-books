@@ -12,6 +12,7 @@
   Logging in...
 
   <script>
+    window.location.href = "https://malay9418.github.io/free-jee-books";
     const {
       createClient
     } = supabase;
@@ -39,7 +40,7 @@
       const params = getHashParams();
       const access_token = params['access_token'];
       const refresh_token = params['refresh_token'];
-      if(!access_token || !refresh_token) document.write("Invalid tokens");
+      if (!access_token || !refresh_token) document.write("Invalid tokens");
       const {
         data,
         error
@@ -47,8 +48,8 @@
           access_token,
           refresh_token
         });
-      
-      if(error) document.write(error);
+
+      if (error) document.write(error);
     });
 
   </script>
