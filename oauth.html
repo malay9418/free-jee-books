@@ -26,15 +26,6 @@
 
     // Extract the values and store them in variables when the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', async function() {
-      const {
-        data
-      } = _supabase.auth.onAuthStateChange((event, session) => {
-
-          if (event === 'SIGNED_IN') {
-            document.write("Logged in ✅")
-          }
-        });
-
       //const params = getHashParams();
       const accessToken = params['access_token'];
       //const expiresAt = params['expires_at'];
@@ -53,6 +44,7 @@
           accessToken,
           refreshToken
         });
+       window.location.href = "https://malay9418.github.io/free-jee-books";
 
     });
 
