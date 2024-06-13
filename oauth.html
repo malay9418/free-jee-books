@@ -1,1 +1,55 @@
-oauth
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Callback</title>
+  <script src="
+    https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.4/dist/umd/supabase.min.js
+    "></script>
+  <script>
+    const {
+      createClient
+    } = supabase;
+    const _supabase = createClient('https://vpksatxwwtlmnnpirfeq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwa3NhdHh3d3RsbW5ucGlyZmVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgyNTc3NjMsImV4cCI6MjAzMzgzMzc2M30.HENM8Efq_NBXlA6zIrspf1v4AaxJLjiZ-gMb4uuk8K0');
+
+    // Function to extract parameters from the URL hash
+    function getHashParams() {
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      const result = {};
+      for (const [key, value] of params.entries()) {
+        result[key] = value;
+      }
+      return result;
+    }
+
+    // Extract the values and store them in variables when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = getHashParams();
+      const accessToken = params['access_token'];
+      const expiresAt = params['expires_at'];
+      const expiresIn = params['expires_in'];
+      const providerToken = params['provider_token'];
+      const refreshToken = params['refresh_token'];
+      const tokenType = params['token_type'];
+
+
+
+    });
+    
+    const {
+      data
+    } = _supabase.auth.onAuthStateChange((event, session) => {
+
+        if (event === 'SIGNED_IN') {
+          alert("logged in")
+        }
+      })
+
+    data.subscription.unsubscribe()
+  </script>
+</head>
+<body>
+</body>
+</html>
