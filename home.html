@@ -113,21 +113,7 @@
     })();
 
 
-    const books = [{
-      title: 'Book One', image: 'https://svgshare.com/i/179y.svg', url: 'https://svgshare.com/i/179y.svg'
-    },
-      {
-        title: 'Book Two', image: 'https://svgshare.com/i/179y.svg', url: 'https://svgshare.com/i/179y.svg'
-      },
-      {
-        title: 'Book Three', image: 'https://svgshare.com/i/179y.svg', url: 'https://svgshare.com/i/179y.svg'
-      },
-      {
-        title: 'Book Four', image: 'https://svgshare.com/i/179y.svg', url: 'https://svgshare.com/i/179y.svg'
-      },
-      {
-        title: 'Book Five', image: 'https://svgshare.com/i/179y.svg', url: 'https://svgshare.com/i/179y.svg'
-      }];
+    const books = [];
 
     const bookList = document.getElementById('bookList');
 
@@ -138,9 +124,9 @@
         bookCard.className = 'col-md-4 col-sm-12';
         bookCard.innerHTML = `
         <div class="book-card">
-        <img src="${book.image}" alt="${book.title}">
+        <img src="${book.image}" alt="${book.name}">
         <div class="book-card-body">
-        <h5 class="book-card-title">${book.title}</h5>
+        <h5 class="book-card-title">${book.name}</h5>
         <a href="${book.url}" class="btn btn-custom">View Book</a>
         </div>
         </div>
