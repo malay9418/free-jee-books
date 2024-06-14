@@ -137,7 +137,7 @@
 
     document.getElementById('searchInput').addEventListener('input', function() {
       const searchTerm = this.value.trim().toLowerCase();
-      const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchTerm));
+      const filteredBooks = books.filter(book => book.name.toLowerCase().includes(searchTerm));
       displayBooks(filteredBooks);
     });
 
