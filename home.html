@@ -113,7 +113,7 @@
     })();
 
 
-    const books = [];
+    var books = [];
 
     const bookList = document.getElementById('bookList');
 
@@ -149,6 +149,8 @@
       .from('books')
       .select();
       console.log(data);
+      books = data;
+      displayBooks(books);
     })();
   </script>
 </body>
