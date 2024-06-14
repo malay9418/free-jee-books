@@ -52,6 +52,12 @@
       padding: 0 50px;
       box-sizing: border-box;
     }
+    .info {
+      font-size: 12px;
+      text-align: center;
+      color: gray;
+      display: block;
+    }
 
   </style>
 </head>
@@ -62,6 +68,7 @@
     <button class="btn btn-custom" onclick="_supabase.auth.signInWithOAuth({provider: 'google', options: {redirectTo: 'https://malay9418.github.io/free-jee-books/oauth'}})">
       <i class="fab fa-google"></i> Login with Google
     </button>
+    <span class="info">login to continue </span>
   </div>
 
 
