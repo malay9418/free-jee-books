@@ -156,14 +156,14 @@
     });
 
     // Initial display of books
-    async function() {
+    (async function() {
       const {
         data, error
       } = await _supabase
       .from('books')
       .select();
       console.log(data);
-    }
+    })();
   </script>
 </body>
 </html>
