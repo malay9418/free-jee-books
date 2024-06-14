@@ -61,7 +61,7 @@
         padding: 20px;
       }
     }
-    
+
     .logout-btn {
       position: absolute;
       top: 10px;
@@ -156,7 +156,14 @@
     });
 
     // Initial display of books
-    displayBooks(books);
+    async function() {
+      const {
+        data, error
+      } = await _supabase
+      .from('books')
+      .select();
+      console.log(data);
+    }
   </script>
 </body>
 </html>
