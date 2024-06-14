@@ -107,7 +107,7 @@
           user
         }
       } = await _supabase.auth.getUser();
-      if (!user) {
+      if (user) {
         window.location.href = "https://malay9418.github.io/free-jee-books/";
       }
     })();
@@ -136,7 +136,7 @@
     }
 
     document.getElementById('searchInput').addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
+      const searchTerm = this.value.trim().toLowerCase();
       const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchTerm));
       displayBooks(filteredBooks);
     });
@@ -148,7 +148,6 @@
       } = await _supabase
       .from('books')
       .select();
-      console.log(data);
       books = data;
       displayBooks(books);
     })();
