@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Free JEE Books</title>
+  <link rel="shortcut icon" href="https://svgshare.com/i/17Ba.svg">
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.4/dist/umd/supabase.min.js"></script>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    .search-bar {
+      margin-bottom: 20px;
+      background-color: #1f1f1f;
+      color: #ffffff;
+      border: 1px solid #444;
+    }
+    .search-bar::placeholder {
+      color: #999999;
+    }
+    .book-card {
+      border: 1px solid #444;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      background-color: #1f1f1f;
+    }
+    .book-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .book-card img {
+      width: 100%;
+      height: auto;
+    }
+    .book-card-body {
+      padding: 10px;
+      text-align: center;
+    }
+    .book-card-title {
+      margin: 10px 0;
+      font-size: 1.2em;
+      color: #ffffff;
+    }
+    .book-card img {
+      padding: 10px;
+      width: 100%;
+      max-width: 350px;
+      display: block;
+      margin: 0 auto;
+    }
+    .logout-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #ffffff;
+    }
+    .btn-custom {
+      border: 1px solid #ffffff;
+      color: #ffffff;
+      background-color: transparent;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .btn-custom:hover {
+      background-color: #ffffff;
+      color: #121212;
+    }
+    @media (max-width: 768px) {
+      .book-card {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .book-card-body {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="logout-btn" onclick="_supabase.auth.signOut()">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+
+  <div class="container">
+    <h1 class="text-center">Free JEE Books</h1>
+    <input type="text" id="searchInput" class="form-control search-bar" placeholder="Search for books...">
+    <div class="row" id="bookList">
+      <!-- Book items will be inserted here by JavaScript -->
+    </div>
+  </div>
+
+  <script>
+    const { createClient } = supabase;
+    const _supabase = createClient('https://vpksatxwwtlmnnpirfeq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwa3NhdHh3d3RsbW5ucGlyZmVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgyNTc3NjMsImV4cCI6MjAzMzgzMzc2M30.HENM8Efq_NBXlA6zIrspf1v4AaxJLjiZ-gMb4uuk8K0');
+
+    _supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_OUT') {
+        window.location.href = "https://malay9418.github.io/free-jee-books/home";
+      }
+    });
+
+    (async function checkAuth() {
+      const { data: { user } } = await _supabase.auth.getUser();
+      if (!user) {
+        window.location.href = "https://malay9418.github.io/free-jee-books/home";
+      }
+    })();
+
+    var books = [];
+
+    const bookList = document.getElementById('bookList');
+
+    function displayBooks(books) {
+      bookList.innerHTML = '';
+      books.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.className = 'col-md-4 col-sm-12';
+        bookCard.innerHTML = `
+        <div class="book-card">
+          <img src="${book.image}" alt="${book.name}">
+          <div class="book-card-body">
+            <h5 class="book-card-title">${book.name}</h5>
+            <a href="${book.url}" class="btn btn-custom">View Book</a>
+          </div>
+        </div>
+        `;
+        bookList.appendChild(bookCard);
+      });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const searchTerm = this.value.trim().toLowerCase();
+      const filteredBooks = books.filter(book => book.name.toLowerCase().includes(searchTerm));
+      displayBooks(filteredBooks);
+    });
+
+    // Initial display of books
+    (async function() {
+      const { data, error } = await _supabase
+      .from('books')
+      .select();
+      books = data;
+      displayBooks(books);
+    })();
+  </script>
+</body>
+</html>
